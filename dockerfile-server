@@ -1,0 +1,26 @@
+FROM node:18.14.2-alpine
+
+ARG INITIAL_WORK_DIR=/app
+ARG COMMON_BASE_PATH=server/src/common
+ARG BUILD_BASE_PATH
+
+WORKDIR $INITIAL_WORK_DIR
+
+# copy package.json (both base and common)
+COPY $BUILD_BASE_PATH/package.json ./$BUILD_BASE_PATH/
+COPY $COMMON_BASE_PATH/package.json ./$COMMON_BASE_PATH/
+RUN cd $BUILD_BASE_PATH/ && npm install
+RUN cd $COMMON_BASE_PATH/ && npm install
+
+# copy files (both base and common)
+COPY $BUILD_BASE_PATH/ ./$BUILD_BASE_PATH/
+COPY $COMMON_BASE_PATH/ ./$COMMON_BASE_PATH/
+
+# after copy of prisma-generated folder, generating types in common folder
+RUN cd $COMMON_BASE_PATH/ && npm run prisma-types
+
+# reset (command) work dir
+WORKDIR $INITIAL_WORK_DIR/$BUILD_BASE_PATH
+CMD [ "npm", "start" ]
+
+

@@ -1,0 +1,97 @@
+//File : database/prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  productId                            String @id @map("_id")
+  price                                Float
+  productDisplayName                   String
+  variantName                          String
+  brandName                            String
+  ageGroup                             String
+  gender                               String
+  displayCategories                    String
+  masterCategory_typeName              String
+  subCategory_typeName                 String
+  styleImages_default_imageURL         String
+  productDescriptors_description_value String
+
+  //common fields
+  createdOn     DateTime? @default(now())
+  createdBy     String?
+  lastUpdatedOn DateTime? @updatedAt
+  lastUpdatedBy String?
+  statusCode    Int?      @default(1)
+
+  @@map("products")
+}
+
+model Payment {
+  paymentId       String @id @default(cuid()) @map("_id")
+  orderAmount     Float
+  paidAmount      Int
+  orderStatusCode Int
+  userId          String
+
+  //relation
+  orderId String @unique
+  order   Order  @relation(fields: [orderId], references: [orderId])
+
+  //common fields
+  createdOn     DateTime? @default(now())
+  createdBy     String?
+  lastUpdatedOn DateTime? @updatedAt
+  lastUpdatedBy String?
+  statusCode    Int?      @default(1)
+
+  @@map("payments")
+}
+
+model Order {
+  orderId         String         @id @map("_id")
+  products        OrderProduct[]
+  orderStatusCode Int
+  potentialFraud  Boolean?
+  userId          String
+
+  //relation
+  Payment Payment?
+
+  //common fields
+  createdOn     DateTime? @default(now())
+  createdBy     String?
+  lastUpdatedOn DateTime? @updatedAt
+  lastUpdatedBy String?
+  statusCode    Int?      @default(1)
+
+  @@map("orders")
+}
+
+model OrderProduct {
+  id String @id @default(cuid()) @map("_id")
+
+  productId    String
+  productPrice Int
+  qty          Int
+  productData  Json
+
+  //relation
+  orderId String
+  Order   Order  @relation(fields: [orderId], references: [orderId])
+
+  //common fields
+  createdOn     DateTime? @default(now())
+  createdBy     String?
+  lastUpdatedOn DateTime? @updatedAt
+  lastUpdatedBy String?
+  statusCode    Int?      @default(1)
+
+  @@map("orderProducts")
+}

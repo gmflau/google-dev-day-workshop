@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mongodb-server
+  name: mongodb-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mongodb-server
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f ../docker-compose.yml
+        kompose.version: 1.26.0 (40646f47)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: mongodb-server
+    spec:
+      containers:
+        - env:
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: prisma
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_REPLICA_HOST
+              value: mongodb-server
+            - name: MONGO_REPLICA_PORT
+              value: "27017"
+          image: gcr.io/central-beach-194106/redis-ms-cqrs-mongodb-server
+          name: mongodb-server
+          ports:
+            - containerPort: 27017
+          resources: {}
+      restartPolicy: Always
+status: {}

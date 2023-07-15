@@ -1,0 +1,28 @@
+const HTTP_STATUS_CODES = {
+  OK: 200,
+  BAD_REQUEST: 400,
+  NOT_FOUND: 404,
+  METHOD_NOT_ALLOWED: 405,
+  INTERNAL_SERVER_ERROR: 500,
+};
+
+const USERS = {
+  DEFAULT: 'ADMIN',
+};
+
+const PERSONAS = [
+  'GRANDMOTHER',
+  'GRANDFATHER',
+  'MOTHER',
+  'FATHER',
+  'SON',
+  'DAUGHTER',
+] as const;
+
+type PersonasType = (typeof PERSONAS)[number];
+
+const MAX_DOCUMENTS_FETCH_LIMIT = 1000;
+
+export { HTTP_STATUS_CODES, USERS, MAX_DOCUMENTS_FETCH_LIMIT, PERSONAS };
+
+export type { PersonasType };

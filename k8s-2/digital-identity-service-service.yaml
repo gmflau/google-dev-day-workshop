@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: digital-identity-service
+  name: digital-identity-service
+spec:
+  ports:
+    - name: "3005"
+      port: 3005
+      targetPort: 3005
+  selector:
+    io.kompose.service: digital-identity-service
+status:
+  loadBalancer: {}

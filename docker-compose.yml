@@ -1,0 +1,212 @@
+version: '3.8'
+services:
+  redis-server:
+    container_name: redis-server
+    #image: 'redislabs/redismod'
+    image: 'redis/redis-stack-server'
+    volumes:
+      - redis-data:/data
+    ports: # enable to visualize data in redis insight
+      - '${REDIS_INSIGHT_PORT}:6379'
+
+  mongodb-server: # mongodb with replica for transactions support
+    container_name: mongodb-server
+    build:
+      context: ./
+      dockerfile: dockerfile-mongodb-replica
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: prisma
+      MONGO_REPLICA_HOST: mongodb-server
+      MONGO_REPLICA_PORT: 27017
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-mongodb-server
+    ports: # enable to visualize data in mongodb compass
+      - '${MONGODB_COMPASS_PORT}:27017'
+      # mongodb compass url is mongodb://localhost:27017/?directConnection=true
+
+  postgresql-server:
+      container_name: postgresql-server
+      image: postgres:latest
+      restart: unless-stopped
+      environment:
+        - POSTGRES_DB=tests
+        - POSTGRES_USER=prisma
+        - POSTGRES_PASSWORD=prisma
+      ports:
+        - "${POSTGRES_PORT}:5432"
+
+  postgresql-pg-admin-gui:
+      container_name: postgresql-pg-admin-gui
+      image: dpage/pgadmin4
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=user@domain.com
+        - PGADMIN_DEFAULT_PASSWORD=password
+      ports:
+        - "${POSTGRES_PG_ADMIN_PORT}:80"      
+
+  database-seed:
+    container_name: database-seed
+    build:
+      context: ./
+      dockerfile: dockerfile-database-seed
+      args:
+        BUILD_BASE_PATH: database
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-database_seed
+    restart: on-failure
+    env_file:
+      - ./.env
+    depends_on:
+      - mongodb-server
+      - postgresql-server
+
+  cdn:
+    container_name: cdn
+    build:
+      context: ./
+      dockerfile: dockerfile-cdn
+      args:
+        BUILD_BASE_PATH: cdn
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-cdn
+    ports:
+      - '${CDN_PORT}:80'
+
+  orders-service:
+    container_name: orders-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/orders
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-orders_service
+    ports:
+      - '${ORDERS_SERVICE_PORT}:3001'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+
+  order-history-service:
+    container_name: order-history-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/order-history
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-order_history_service
+    ports:
+      - '${ORDER_HISTORY_SERVICE_PORT}:3002'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+
+  products-service:
+    container_name: products-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/products
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-products_service
+    ports:
+      - '${PRODUCTS_SERVICE_PORT}:3003'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+
+  payments-service:
+    container_name: payments-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/payments
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-payments_service
+    ports:
+      - '${PAYMENTS_SERVICE_PORT}:3004'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+      - orders-service
+
+  digital-identity-service:
+    container_name: digital-identity-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/digital-identity
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-digital_identity_service
+    ports:
+      - '${DIGITAL_IDENTITY_SERVICE_PORT}:3005'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+      - payments-service
+
+  profile-service:
+    container_name: profile-service
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/services/profile
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-profile_service
+    ports:
+      - '${PROFILE_SERVICE_PORT}:3006'
+    env_file:
+      - ./.env
+    depends_on:
+      - redis-server
+      - mongodb-server
+      - payments-service
+
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./
+      dockerfile: dockerfile-server
+      args:
+        BUILD_BASE_PATH: server/src/api-gateway
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-api_gateway
+    ports:
+      - '${API_GATEWAY_PORT}:3000'
+    env_file:
+      - ./.env
+    depends_on:
+      - orders-service
+      - order-history-service
+      - products-service
+      - digital-identity-service
+
+  client:
+    container_name: client
+    build:
+      context: ./
+      dockerfile: dockerfile-client
+      args:
+        BUILD_BASE_PATH: client/nextjs
+        API_GATEWAY_URI: ${API_GATEWAY_URI}
+        NEXT_PUBLIC_API_GATEWAY_URI: ${NEXT_PUBLIC_API_GATEWAY_URI}
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-client
+    ports:
+      - '${FRONTEND_CLIENT_PORT}:4200'
+    env_file:
+      - ./.env
+    stdin_open: true # -i input flag
+    tty: true # -t terminal flag
+    depends_on:
+      - api-gateway
+      - cdn
+
+volumes:
+  redis-data:
+  mongodb-data:

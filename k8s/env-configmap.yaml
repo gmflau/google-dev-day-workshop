@@ -1,0 +1,33 @@
+apiVersion: v1
+data:
+  API_GATEWAY_PORT: "3000"
+  API_GATEWAY_URI: http://api-gateway.default.svc.cluster.local:3000
+  CDN_HOST: cdn
+  CDN_PORT: "80"
+  #DATABASE_URL: postgresql://prisma:prisma@postgresql-server.default.svc.cluster.local:5432/dbFashion?schema=public
+  DATABASE_URL: postgresql://postgres:postgres@34.70.239.249:5432/dbFashion?schema=public 
+  DIGITAL_IDENTITY_SERVICE_CONTAINER_ORIGIN: http://digital-identity-service
+  DIGITAL_IDENTITY_SERVICE_PORT: "3005"
+  FRONTEND_CLIENT_PORT: "4200"
+  NEXT_PUBLIC_API_GATEWAY_URI: http://35.239.155.88:3000
+  ORDER_HISTORY_SERVICE_CONTAINER_ORIGIN: http://order-history-service
+  ORDER_HISTORY_SERVICE_PORT: "3002"
+  ORDERS_SERVICE_CONTAINER_ORIGIN: http://orders-service
+  ORDERS_SERVICE_PORT: "3001"
+  PAYMENTS_SERVICE_CONTAINER_ORIGIN: http://payments-service
+  PAYMENTS_SERVICE_PORT: "3004"
+  POSTGRES_PG_ADMIN_PORT: "5200"
+  POSTGRES_PORT: "5432"
+  PRODUCTS_SERVICE_CONTAINER_ORIGIN: http://products-service
+  PRODUCTS_SERVICE_PORT: "3003"
+  PROFILE_SERVICE_CONTAINER_ORIGIN: http://profile-service
+  PROFILE_SERVICE_PORT: "3006"
+  PROJECT_ID: "central-beach-194106"
+  REDIS_CONNECTION_URI: redis://redis-server:6379
+  REDIS_INSIGHT_PORT: "6379"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api-gateway-env
+  name: env

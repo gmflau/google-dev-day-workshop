@@ -1,0 +1,16 @@
+.git
+
+**/node_modules
+**/dist
+**/.env.local
+
+**/*-lock.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+/.angular/cache
+**/.next
+.vscode
