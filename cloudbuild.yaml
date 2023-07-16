@@ -67,12 +67,6 @@ steps:
         --zone ${_GKE_ZONE}
 
       # Deploy env and db-seed
-      kubectl apply -f ./k8s-init -n default
-      sleep 90
-      kubectl delete -f ./k8s-init/database-seed-pod.yaml -n default
-      sleep 20
-
-      # Deploy the main microservices App
       kubectl apply -f ./k8s -n default
 
 substitutions:

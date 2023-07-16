@@ -135,6 +135,6 @@ spec:
       imagePullPolicy: Always
       name: database-seed
       resources: {}
-  restartPolicy: OnFailure
-  #restartPolicy: Never
+  #restartPolicy: OnFailure
+  restartPolicy: Never
 status: {}
