@@ -20,6 +20,10 @@ gcloud alpha builds triggers create cloud-source-repositories \
 On success, you should see the newly created trigger inside Google Cloud Console:
 ![CB Trigger](./img/CB_Trigger.png)
     
+You can click on the `redis-cb-trigger` link and see its details as shown below. Make sure you see all **seven** variables are correctly configured. 
+![DB Trigger Details - 7 vars](./img/CB_Trigger_Details.png)
+Click `CANCEL` when done reviewing.
+         
 Run the trigger to deploy the sample app:
 ```bash
 gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master --region=$CLUSTER_LOCATION
