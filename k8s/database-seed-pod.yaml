@@ -132,7 +132,9 @@ spec:
               key: REDIS_INSIGHT_PORT
               name: env
       image: gcr.io/central-beach-194106/redis-ms-cqrs-database_seed
+      imagePullPolicy: Always
       name: database-seed
       resources: {}
   restartPolicy: OnFailure
+  #restartPolicy: Never
 status: {}
