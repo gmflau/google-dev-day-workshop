@@ -1,0 +1,76 @@
+steps:
+
+### Build Images
+  - id: build-images
+    name: 'gcr.io/cloud-builders/docker'
+    env:
+      - "PROJECT_ID=$PROJECT_ID"
+      - "_API_GATEWAY_IP=${_API_GATEWAY_IP}"
+      - "_REDIS_URI=${_REDIS_URI}"
+      - "_REDIS_INSIGHT_PORT=${_REDIS_INSIGHT_PORT}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      # Install Linux libraries for envsubst
+      apt-get update -y
+      apt-get install gettext-base -y
+      
+      # Inject IPs for ENV
+      mv .env /tmp/.env
+      envsubst < /tmp/.env > .env
+      more .env
+  
+      docker compose build
+      
+
+### Push Images
+  - id: push-images
+    name: 'gcr.io/cloud-builders/docker'
+    env:
+      - "PROJECT_ID=$PROJECT_ID"
+    args: [ 'compose', 'push' ]
+
+
+### Deploy
+  - id: 'deploy'
+    name: 'gcr.io/cloud-builders/gcloud'
+    env:
+      - "PROJECT_ID=$PROJECT_ID"
+      - "_GKE_CLUSTER=${_GKE_CLUSTER}"
+      - "_GKE_ZONE=${_GKE_ZONE}"
+      - "_API_GATEWAY_IP=${_API_GATEWAY_IP}"
+      - "_CLIENT_IP=${_CLIENT_IP}"
+      - "_REDIS_URI=${_REDIS_URI}"
+      - "_REDIS_INSIGHT_PORT=${_REDIS_INSIGHT_PORT}"
+    script: |
+      #!/bin/bash
+      set -e
+
+      # Install Linux libraries for envsubst
+      apt-get update -y
+      apt-get install gettext-base -y
+
+      # Inject IPs for ENV-CONFIG, API and CLIENT services
+      mv ./k8s/env-configmap.yaml /tmp/env-configmap.yaml
+      envsubst < /tmp/env-configmap.yaml > ./k8s/env-configmap.yaml
+      mv ./k8s/api-gateway-service.yaml /tmp/api-gateway-service.yaml
+      envsubst < /tmp/api-gateway-service.yaml > ./k8s/api-gateway-service.yaml
+      mv ./k8s/client-service.yaml /tmp/client-service.yaml
+      envsubst < /tmp/client-service.yaml > ./k8s/client-service.yaml
+
+      # Deploy App 
+      gcloud container clusters get-credentials ${_GKE_CLUSTER} \
+        --project $PROJECT_ID \
+        --zone ${_GKE_ZONE}
+      # Deploy the App
+      kubectl apply -f ./k8s -n default
+
+substitutions:
+    _GKE_CLUSTER: gke-cluster
+    _GKE_ZONE: us-central1
+    _API_GATEWAY_IP: 0.0.0.0
+    _CLIENT_IP: 0.0.0.0
+    _REDIS_URI: redis://redis-server:6379
+    _REDIS_INSIGHT_PORT: "6379"
+
