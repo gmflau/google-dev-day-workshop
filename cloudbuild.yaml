@@ -54,8 +54,8 @@ steps:
       apt-get install gettext-base -y
 
       # Inject IPs for ENV-CONFIG, API and CLIENT services
-      mv ./k8s/env-configmap.yaml /tmp/env-configmap.yaml
-      envsubst < /tmp/env-configmap.yaml > ./k8s/env-configmap.yaml
+      mv ./k8s-init/env-configmap.yaml /tmp/env-configmap.yaml
+      envsubst < /tmp/env-configmap.yaml > ./k8s-init/env-configmap.yaml
       mv ./k8s/api-gateway-service.yaml /tmp/api-gateway-service.yaml
       envsubst < /tmp/api-gateway-service.yaml > ./k8s/api-gateway-service.yaml
       mv ./k8s/client-service.yaml /tmp/client-service.yaml
@@ -65,7 +65,14 @@ steps:
       gcloud container clusters get-credentials ${_GKE_CLUSTER} \
         --project $PROJECT_ID \
         --zone ${_GKE_ZONE}
-      # Deploy the App
+
+      # Deploy env and db-seed
+      kubectl apply -f ./k8s-init -n default
+      sleep 90
+      kubectl delete -f ./k8s-init/database-seed-pod.yaml -n default
+      sleep 20
+
+      # Deploy the main microservices App
       kubectl apply -f ./k8s -n default
 
 substitutions:
