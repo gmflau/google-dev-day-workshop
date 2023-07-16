@@ -179,27 +179,28 @@ kubectl apply -f /tmp/debezium-server-pod.yml
 ```
     
 Create a RDI job:    
-Edit emp.yaml:
+Edit emp.yaml by updating the `server_name` with your CloudSQL PostgreSQL instance IP address::
 ```bash
-cat << 'EOF' > ./emp.yaml
 source:
-  server_name: <CloudSQL PostgreSQL's public IP address>
+  server_name: 104.154.225.134
   db: postgres
   table: emp
 transform:
   - uses: rename_field
     with:
-      from_field: fname
-      to_field: first_name
+      fields:
+        - from_field: lname
+          to_field: last_name
+        - from_field: fname
+          to_field: first_name
 output:
   - uses: redis.write
     with:
       connection: target
       data_type: json
       key:
-        expression: concat(['employee:',user_id]) 
+        expression: concat(['employees:',user_id])
         language: jmespath
-EOF
 ```
 Create a ConfigMap for the job:
 ```bash

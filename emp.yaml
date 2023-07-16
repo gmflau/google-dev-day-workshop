@@ -1,0 +1,20 @@
+source:
+  server_name: 104.154.225.134
+  db: postgres
+  table: emp
+transform:
+  - uses: rename_field
+    with:
+      fields:
+        - from_field: lname
+          to_field: last_name
+        - from_field: fname
+          to_field: first_name
+output:
+  - uses: redis.write
+    with:
+      connection: target
+      data_type: json
+      key:
+        expression: concat(['employees:',user_id]) 
+        language: jmespath
