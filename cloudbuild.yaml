@@ -6,6 +6,7 @@ steps:
     env:
       - "PROJECT_ID=$PROJECT_ID"
       - "_API_GATEWAY_IP=${_API_GATEWAY_IP}"
+      - "_DATABASE_URI=${_DATABASE_URI}"
       - "_REDIS_URI=${_REDIS_URI}"
       - "_REDIS_INSIGHT_PORT=${_REDIS_INSIGHT_PORT}"
     script: |
@@ -41,6 +42,7 @@ steps:
       - "_GKE_ZONE=${_GKE_ZONE}"
       - "_API_GATEWAY_IP=${_API_GATEWAY_IP}"
       - "_CLIENT_IP=${_CLIENT_IP}"
+      - "_DATABASE_URI=${_DATABASE_URI}"
       - "_REDIS_URI=${_REDIS_URI}"
       - "_REDIS_INSIGHT_PORT=${_REDIS_INSIGHT_PORT}"
     script: |
@@ -71,6 +73,7 @@ substitutions:
     _GKE_ZONE: us-central1
     _API_GATEWAY_IP: 0.0.0.0
     _CLIENT_IP: 0.0.0.0
+    _DATABASE_URI: postgresql://prisma:prisma@postgresql-server:5432/dbFashion?schema=public
     _REDIS_URI: redis://redis-server:6379
     _REDIS_INSIGHT_PORT: "6379"
 
