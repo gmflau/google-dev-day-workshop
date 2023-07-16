@@ -14,11 +14,11 @@ git clone https://source.developers.google.com/p/$PROJECT_ID/r/$REDIS_REPO
 Deposit workshop sample app into the repo:
 ```bash
 cd $REDIS_REPO
-gsutil cp gs://redis-dev-days-workshop/google-dev-days-workshop-main.zip .
-unzip google-dev-days-workshop-main.zip
-mv google-dev-days-workshop-main/{*,.[^.]*,..?*} .
-rm -fr google-dev-days-workshop-main
-rm google-dev-days-workshop-main.zip
+gsutil cp gs://redis-dev-days-workshop/google-dev-day-workshop-main.zip .
+unzip google-dev-day-workshop-main.zip
+mv google-dev-day-workshop-main/{*,.[^.]*,..?*} .
+rm -fr google-dev-day-workshop-main
+rm google-dev-day-workshop-main.zip
 git add .
 git commit -m "Initial commit"
 git push -u origin master

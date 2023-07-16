@@ -1,4 +1,4 @@
-# Build Better, Faster Applications – Faster Workshop (google-dev-days-workshop)
+# Build Better, Faster Applications – Faster Workshop (google-dev-day-workshop)
 
 The sample app used in this workshop is a cloud-first microservices demo application that allows a customer to populate a shopping cart with products. The site has a "Buy Now" button to facilitate ordering those products. It sets up and populatea product database (perhaps a SQL database). A backend API to handle the processes of creating an order, creating an invoice, processing payments, handling fulfillment, and updating the customer's order history.
 

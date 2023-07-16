@@ -6,6 +6,7 @@ export CLUSTER_LOCATION=us-central1
 export CLUSTER_NAME="redis-gke-cluster-$CLUSTER_LOCATION"
 export REDIS_API_GATEWAY_IP="$(gcloud compute addresses describe redis-api-gateway-ip --region=us-central1 --format='value(address)')"
 export REDIS_CLIENT_HOST_IP="$(gcloud compute addresses describe redis-client-host-ip --region=us-central1 --format='value(address)')"
+export DATABASE_URL="postgresql://postgres:postgres@${POSTGRESQL_INSTANCE_IP}:5432/dbFashion?schema=public"
 export REDIS_CLOUD_BUILD_TRIGGER="redis-cb-trigger"
 
 gcloud alpha builds triggers create cloud-source-repositories \
@@ -13,7 +14,7 @@ gcloud alpha builds triggers create cloud-source-repositories \
   --repo=$REDIS_REPO \
   --branch-pattern=^master$ \
   --build-config=cloudbuild.yaml \
-  --substitutions=_GKE_CLUSTER=$CLUSTER_NAME,_GKE_ZONE=$CLUSTER_LOCATION,_API_GATEWAY_IP=$REDIS_API_GATEWAY_IP,_CLIENT_IP=$REDIS_CLIENT_HOST_IP,_REDIS_URI=$REDIS_URI,_REDIS_INSIGHT_PORT=$REDIS_INSIGHT_PORT \
+  --substitutions=_GKE_CLUSTER=$CLUSTER_NAME,_GKE_ZONE=$CLUSTER_LOCATION,_API_GATEWAY_IP=$REDIS_API_GATEWAY_IP,_CLIENT_IP=$REDIS_CLIENT_HOST_IP,_REDIS_URI=$REDIS_URI,_REDIS_INSIGHT_PORT=$REDIS_INSIGHT_PORT,_DATABASE_URI=$DATABASE_URL \
   --region=$CLUSTER_LOCATION
 ```
 On success, you should see the newly created trigger inside Google Cloud Console:

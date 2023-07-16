@@ -4,7 +4,7 @@ data:
   API_GATEWAY_URI: http://api-gateway.default.svc.cluster.local:3000
   CDN_HOST: cdn
   CDN_PORT: "80"
-  DATABASE_URL: postgresql://postgres:postgres@${_DATABASE_URI}:5432/dbFashion?schema=public 
+  DATABASE_URL: ${_DATABASE_URI}
   DIGITAL_IDENTITY_SERVICE_CONTAINER_ORIGIN: http://digital-identity-service
   DIGITAL_IDENTITY_SERVICE_PORT: "3005"
   FRONTEND_CLIENT_PORT: "4200"
