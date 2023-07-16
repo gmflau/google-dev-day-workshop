@@ -11,9 +11,6 @@ services:
     restart: on-failure
     env_file:
       - ./.env
-    depends_on:
-      - mongodb-server
-      - postgresql-server
 
   cdn:
     container_name: cdn
@@ -38,9 +35,6 @@ services:
       - '${ORDERS_SERVICE_PORT}:3001'
     env_file:
       - ./.env
-    depends_on:
-      - redis-server
-      - mongodb-server
 
   order-history-service:
     container_name: order-history-service
@@ -54,9 +48,6 @@ services:
       - '${ORDER_HISTORY_SERVICE_PORT}:3002'
     env_file:
       - ./.env
-    depends_on:
-      - redis-server
-      - mongodb-server
 
   products-service:
     container_name: products-service
@@ -70,9 +61,6 @@ services:
       - '${PRODUCTS_SERVICE_PORT}:3003'
     env_file:
       - ./.env
-    depends_on:
-      - redis-server
-      - mongodb-server
 
   payments-service:
     container_name: payments-service
@@ -87,8 +75,6 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - redis-server
-      - mongodb-server
       - orders-service
 
   api-gateway:
@@ -107,7 +93,6 @@ services:
       - orders-service
       - order-history-service
       - products-service
-      - digital-identity-service
 
   client:
     container_name: client
