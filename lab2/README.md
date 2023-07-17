@@ -142,31 +142,13 @@ Capture the `Public IP address` for later use in the lab in an environment varia
 ```bash
 export POSTGRESQL_INSTANCE_IP=$(gcloud sql instances describe $POSTGRESQL_INSTANCE --format=json | jq -r '.ipAddresses[] | select(.type == "PRIMARY") | .ipAddress')
 ```
-            
-Create two sql batch files:
+                
+By default, PostgreSQL database superuser (postgres) does not have permission to create a replication slot which is required by RDI.  Run the following commands to grant the permission:  
 ```bash
 cat <<EOF > alter_postgres_replication.sql
 alter user postgres with replication;
 EOF
 ```
-```bash
-cat <<EOF > sql_batch_file.sql
-CREATE TABLE emp (
-	user_id serial PRIMARY KEY,
-	fname VARCHAR ( 50 ) NOT NULL,
-	lname VARCHAR ( 50 ) NOT NULL
-);
-insert into emp (fname, lname) values ('Gilbert', 'Lau');
-insert into emp (fname, lname) values ('Pete', 'Sampras');
-insert into emp (fname, lname) values ('Roger', 'Federer');
-insert into emp (fname, lname) values ('Novak', 'Djokovic');
-insert into emp (fname, lname) values ('Tiger', 'Woods');
-insert into emp (fname, lname) values ('Freddie', 'Mercury');
-insert into emp (fname, lname) values ('Michael', 'Jordan');
-EOF
-```
-              
-By default, PostgreSQL database superuser (postgres) does not have permission to create a replication slot which is required by RDI.  Run the following commands to grant the permission:  
 ```
 gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < alter_postgres_replication.sql
 ```
@@ -176,22 +158,3 @@ On success, you should see the following output:
 Connecting to database with SQL user [postgres].Password:
 ALTER ROLE
 ```
-    
-Run the following command to populate test data:
-```
-gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql
-```
-When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return    
-On success, you should see the following output:
-```
-Connecting to database with SQL user [postgres].Password: 
-CREATE TABLE
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-```
-

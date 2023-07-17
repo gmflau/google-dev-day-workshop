@@ -228,7 +228,42 @@ Ingest Jobs
 | emp  | 35.222.41.246 | postgres |        | emp   | Yes             | No     | Yes |
 +------+---------------+----------+--------+-------+-----------------+--------+-----+
 ```
-        
+       
+Create test data in CloudSQL PostgreSQL database (source):    
+```bash
+cat <<EOF > sql_batch_file.sql
+CREATE TABLE emp (
+	user_id serial PRIMARY KEY,
+	fname VARCHAR ( 50 ) NOT NULL,
+	lname VARCHAR ( 50 ) NOT NULL
+);
+insert into emp (fname, lname) values ('Gilbert', 'Lau');
+insert into emp (fname, lname) values ('Pete', 'Sampras');
+insert into emp (fname, lname) values ('Roger', 'Federer');
+insert into emp (fname, lname) values ('Novak', 'Djokovic');
+insert into emp (fname, lname) values ('Tiger', 'Woods');
+insert into emp (fname, lname) values ('Freddie', 'Mercury');
+insert into emp (fname, lname) values ('Michael', 'Jordan');
+EOF
+```
+Run the following command to populate test data:
+```
+gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql
+```
+When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return    
+On success, you should see the following output:
+```
+Connecting to database with SQL user [postgres].Password: 
+CREATE TABLE
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+```
+            
 Verify the job status in RDI:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
@@ -282,5 +317,3 @@ Performance Statistics per Batch (batch size: 2000)
     
 Now, the RDI Ingest with CloudSQL PostgreSQL as `source` and fully managed Redis Enterprise database as `target` for order information has been set up properly.
      
- 
-
