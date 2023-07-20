@@ -45,6 +45,7 @@ steps:
       - "_DATABASE_URI=${_DATABASE_URI}"
       - "_REDIS_URI=${_REDIS_URI}"
       - "_REDIS_INSIGHT_PORT=${_REDIS_INSIGHT_PORT}"
+      - "_IS_RDI_ENABLED=${_IS_RDI_ENABLED}"
     script: |
       #!/bin/bash
       set -e
@@ -77,4 +78,5 @@ substitutions:
     _DATABASE_URI: postgresql://prisma:prisma@postgresql-server:5432/dbFashion?schema=public
     _REDIS_URI: redis://redis-server:6379
     _REDIS_INSIGHT_PORT: "6379"
+    _IS_RDI_ENABLED: false
 
