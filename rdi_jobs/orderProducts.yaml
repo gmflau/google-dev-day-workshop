@@ -1,0 +1,31 @@
+source:
+  server_name: 104.154.225.134
+  schema: public
+  table: orderProducts
+transform:
+  - uses: map
+    with:
+      expression:
+        _id: _id
+        productId: productId
+        productPrice: productPrice
+        qty: qty
+        productData: productData
+        orderId: orderId
+        createdOn: createdOn
+        createdBy: createdBy
+        lastUpdatedOn: lastUpdatedOn
+        lastUpdatedBy: lastUpdatedBy
+        statusCode: statusCode
+      language: jmespath
+output:
+  - uses: redis.write
+    with:
+      nest:
+        parent:
+          table: orders
+        nesting_key: _id
+        parent_key: orderId
+        path: $.products
+        structure: map
+        on_update: merge

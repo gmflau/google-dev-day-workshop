@@ -1,0 +1,25 @@
+source:
+  server_name: 104.154.225.134
+  schema: public
+  table: orders
+transform:
+  - uses: map
+    with:
+      expression:
+        orderId: _id
+        orderStatusCode: orderStatusCode
+        potentialFraud: potentialFraud
+        userId: userid
+        createdOn: createdOn
+        createdBy: createdBy
+        lastUpdatedOn: lastUpdatedOn
+        lastUpdatedBy: lastupdatedBy
+        statusCode: statusCode
+      language: jmespath
+output:
+  - uses: redis.write
+    with:
+      key:
+        expression: concat(['orders:orderId:', orderId])
+        language: jmespath
+
