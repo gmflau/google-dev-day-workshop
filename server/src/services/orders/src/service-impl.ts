@@ -31,8 +31,6 @@ import { listenToStreams } from '../../../common/utils/redis/redis-streams';
 import { addMessageToStream } from '../../../common/utils/redis/redis-streams';
 import { getPrismaClient } from '../../../common/utils/prisma/prisma-wrapper';
 
-const envVariables = process.env;
-
 const validateOrder = async (_order) => {
   const schema = yup.object().shape({
     orderId: yup.string(),
@@ -161,8 +159,6 @@ const createOrder = async (
 
     const products = await getProductDetails(order);
     addProductDataToOrders(order, products);
-
-    console.log("envVariables.IS_RDI_ENABLED = " +envVariables.IS_RDI_ENABLED);
 
     if (!SERVER_CONFIG.IS_RDI_ENABLED) {
       await addOrderToRedis(order);
