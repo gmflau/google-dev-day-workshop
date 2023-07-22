@@ -24,8 +24,9 @@ spec:
         io.kompose.service: cdn
     spec:
       containers:
-        - image: gcr.io/central-beach-194106/redis-ms-cqrs-cdn
+        - image: gcr.io/central-beach-194106/redis-ms-cqrs-cdn:latest
           name: cdn
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources: {}

@@ -7,7 +7,7 @@ services:
       dockerfile: dockerfile-database-seed
       args:
         BUILD_BASE_PATH: database
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-database_seed
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-database_seed:latest
     restart: on-failure
     env_file:
       - ./.env
@@ -19,7 +19,7 @@ services:
       dockerfile: dockerfile-cdn
       args:
         BUILD_BASE_PATH: cdn
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-cdn
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-cdn:latest
     ports:
       - '${CDN_PORT}:80'
 
@@ -30,7 +30,7 @@ services:
       dockerfile: dockerfile-server
       args:
         BUILD_BASE_PATH: server/src/services/orders
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-orders_service
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-orders_service:latest
     ports:
       - '${ORDERS_SERVICE_PORT}:3001'
     env_file:
@@ -43,7 +43,7 @@ services:
       dockerfile: dockerfile-server
       args:
         BUILD_BASE_PATH: server/src/services/order-history
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-order_history_service
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-order_history_service:latest
     ports:
       - '${ORDER_HISTORY_SERVICE_PORT}:3002'
     env_file:
@@ -56,7 +56,7 @@ services:
       dockerfile: dockerfile-server
       args:
         BUILD_BASE_PATH: server/src/services/products
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-products_service
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-products_service:latest
     ports:
       - '${PRODUCTS_SERVICE_PORT}:3003'
     env_file:
@@ -69,7 +69,7 @@ services:
       dockerfile: dockerfile-server
       args:
         BUILD_BASE_PATH: server/src/services/payments
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-payments_service
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-payments_service:latest
     ports:
       - '${PAYMENTS_SERVICE_PORT}:3004'
     env_file:
@@ -84,7 +84,7 @@ services:
       dockerfile: dockerfile-server
       args:
         BUILD_BASE_PATH: server/src/api-gateway
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-api_gateway
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-api_gateway:latest
     ports:
       - '${API_GATEWAY_PORT}:3000'
     env_file:
@@ -103,7 +103,7 @@ services:
         BUILD_BASE_PATH: client/nextjs
         API_GATEWAY_URI: ${API_GATEWAY_URI}
         NEXT_PUBLIC_API_GATEWAY_URI: ${NEXT_PUBLIC_API_GATEWAY_URI}
-    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-client
+    image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-client:latest
     ports:
       - '${FRONTEND_CLIENT_PORT}:4200'
     env_file:

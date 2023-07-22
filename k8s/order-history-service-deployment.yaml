@@ -145,7 +145,8 @@ spec:
                 configMapKeyRef:
                   key: REDIS_INSIGHT_PORT
                   name: env
-          image: gcr.io/central-beach-194106/redis-ms-cqrs-order_history_service
+          image: gcr.io/central-beach-194106/redis-ms-cqrs-order_history_service:latest
+          imagePullPolicy: Always
           name: order-history-service
           ports:
             - containerPort: 3002
