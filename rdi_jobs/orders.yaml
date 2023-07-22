@@ -1,5 +1,5 @@
 source:
-  server_name: 35.226.101.135
+  server_name: workshop
   db: dbFashion
   table: orders
 transform:
