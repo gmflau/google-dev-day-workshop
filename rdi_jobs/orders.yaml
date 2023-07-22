@@ -9,7 +9,7 @@ transform:
         orderId: _id
         orderStatusCode: orderStatusCode
         potentialFraud: potentialFraud
-        userId: userid
+        userId: userId
         createdOn: createdOn
         createdBy: createdBy
         lastUpdatedOn: lastUpdatedOn
@@ -20,6 +20,6 @@ output:
   - uses: redis.write
     with:
       key:
-        expression: concat(['orders:orderId:', orderId])
+        expression: concat(['Orders:orderId:', orderId])
         language: jmespath
 
