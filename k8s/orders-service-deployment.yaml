@@ -145,6 +145,11 @@ spec:
                 configMapKeyRef:
                   key: REDIS_INSIGHT_PORT
                   name: env
+            - name: IS_RDI_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  key: IS_RDI_ENABLED
+                  name: env
           image: gcr.io/central-beach-194106/redis-ms-cqrs-orders_service:latest
           imagePullPolicy: Always
           name: orders-service
