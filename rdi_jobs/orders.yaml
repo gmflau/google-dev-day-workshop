@@ -1,6 +1,6 @@
 source:
-  server_name: 104.154.225.134
-  schema: public
+  server_name: 35.226.101.135
+  db: dbFashion
   table: orders
 transform:
   - uses: map

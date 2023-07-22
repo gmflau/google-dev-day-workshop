@@ -1,5 +1,5 @@
 source:
-  server_name: 104.154.225.134
+  server_name: 35.226.101.135
   db: postgres
   table: emp
 transform:
