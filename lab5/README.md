@@ -207,12 +207,12 @@ When prompted (RDI Database Password []:), enter `redis` then hit return
 You should see a similar output like below:
 ```
 Ingest Jobs
-+---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
-| Name          | Server   | DB        | Schema | Table         | Transformations | Filter | Key |
-+---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
-| orders        | workshop | dbFashion |        | orders        | Yes             | No     | Yes |
-| orderProducts | workshop | dbFashion |        | orderProducts | Yes             | No     | No  |
-+---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
++---------------+--------+----+--------+---------------+-----------------+--------+-----+
+| Name          | Server | DB | Schema | Table         | Transformations | Filter | Key |
++---------------+--------+----+--------+---------------+-----------------+--------+-----+
+| orders        |        |    |        | orders        | Yes             | No     | Yes |
+| orderProducts |        |    |        | orderProducts | Yes             | No     | No  |
++---------------+--------+----+--------+---------------+-----------------+--------+-----+
 ```
                
 Verify the job status in RDI:
