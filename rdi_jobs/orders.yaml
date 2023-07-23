@@ -18,6 +18,6 @@ output:
   - uses: redis.write
     with:
       key:
-        expression: concat(['Order:orderId:', orderId])
+        expression: concat(['orders:orderId:', orderId])
         language: jmespath
 

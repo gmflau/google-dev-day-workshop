@@ -137,7 +137,6 @@ When prompted for password (RDI Database Password []:), enter `redis` and hit re
 Edit application.properties:    
 Update the value of the following fields with the CloudSQL PostgreSQL's public IP address:   :
 ```
-debezium.source.topic.prefix=
 debezium.source.database.hostname=
 ```
       
