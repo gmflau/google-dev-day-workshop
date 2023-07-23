@@ -1,6 +1,4 @@
 source:
-  server_name: workshop
-  db: dbFashion
   table: orderProducts
 transform:
   - uses: map

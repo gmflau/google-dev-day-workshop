@@ -1,6 +1,4 @@
 source:
-  server_name: workshop
-  db: dbFashion
   table: orders
 transform:
   - uses: map
@@ -20,6 +18,6 @@ output:
   - uses: redis.write
     with:
       key:
-        expression: concat(['Orders:orderId:', orderId])
+        expression: concat(['Order:orderId:', orderId])
         language: jmespath
 

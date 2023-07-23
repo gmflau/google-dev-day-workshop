@@ -188,8 +188,18 @@ Deploy the RDI job:
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
 ```
 When prompted for password (RDI Database Password []:), enter `redis` and hit return   
-    
-     
+You should similar output if the jobs are successfully created:
+```
+INFO - Reading orders.yaml job
+INFO - Reading orderProducts.yaml job
+RDI Database Password []: 
+WARNING - Property 'json_update_strategy' will be deprecated in future releases. Use 'on_update' job-level property to define the json update strategy.
+Deploying settings to 10.96.0.22:12001
+INFO - Connected to target database
+INFO - RedisJSON is installed on the target Redis DB
+Done
+```    
+       
 Check if the job has been created:
 ```bash
 kubectl exec -it -n default pod/redis-di-cli -- redis-di list-jobs
