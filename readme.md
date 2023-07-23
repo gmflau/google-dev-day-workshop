@@ -12,7 +12,7 @@ Inside the app itself, it uses a microservices approach with Common Query Respon
 This is not an elegant solution to implement CQRS. We will introduce Redis Data Integration (RDI) which addresses common enterprise caching patterns such as write-behind, write-through, CQRS, etc. in a developer-friendly fashion. By that I mean the implementation of these enterprise caching patterns are made easy to realize in your application stack with little to no coding necessary. In this workshop, we will use RDI pre-fetching capability to implement read-optimized on Redis Enterprise and write-optimized on the SQL database. It no longer requires writing the piece of data to Redis Enterprise while writing the same piece of data to the backend SQL database. RDI is responsible for replicating changes in the backend SQL database to Redis Enterprise database near real-time without impacting application performance. As a result, developers can develop faster applications faster than ever before.
     
 Then we will make a slight turn to the most popular topic in the application development world, Generative Artificial Intelligence. Gen AI in short. It makes your applications better and richer by leveraging generative AI to creates business value by automating, speeding up, and scaling the process of creating new content. Teaming Gen AI of Vertex AI portofolio up with Redis Enterprise as Vector database, developers can build better and more intelligent apps to produce richer and more refined AI-powered engaging experience.
-![Redis Vector for Gen AI](./img/RedisOpenAI-QnA-Architecture.png)    
+![Redis Vector for Gen AI](./img/RedisVertexAI-QnA-Architecture.png)    
     
      
 #### Workshop Agenda: [~4 hours duration]
