@@ -51,7 +51,7 @@ Part 1: Development and Deployment Labs - Part I
 Part 2: Development and Deployment Labs - Part II
 * [Lab 4:](./lab4/) Create a Google Cloud Build Trigger and Deploy the Sample App
 * [Lab 5:](./lab5/) Set up Redis Data Integration (RDI)
-* [Lab 6:](./lab6/) Re-deploy the sample app using the CloudSQL PostgreSQL backend along with Redis Data Integration
+* [Lab 6:](./lab6/) Re-deploy the sample app using the CloudSQL PostgreSQL backend along with Redis Data Integration (RDI)
 * [Lab 7:](./lab7/) Microservices Observability Walkthrough
     
 Part 3: Gen AI powered applications - How Gen AI + Redis VSS can work together
