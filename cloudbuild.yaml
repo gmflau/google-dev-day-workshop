@@ -67,6 +67,9 @@ steps:
         --project $PROJECT_ID \
         --zone ${_GKE_ZONE}
 
+      # Delete any prior deployments if any
+      kubectl delete -f ./k8s -n default
+ 
       # Deploy env and db-seed
       kubectl apply -f ./k8s -n default
 

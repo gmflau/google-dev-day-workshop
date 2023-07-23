@@ -1,5 +1,5 @@
-# Lab 7: Re-deploy the sample app with new CloudSQL PostgreSQL backend along with RDI
-Run the trigger to deploy the sample app
+# Lab 8: Microservices Observability Walkthrough
+Explore the microservices inside Google Cloud Console:
+![ASM SM Topology](./img/ASM_SM_Topology.png)
 
 
-:

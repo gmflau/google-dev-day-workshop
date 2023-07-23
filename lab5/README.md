@@ -177,36 +177,12 @@ spec:
 EOF
 kubectl apply -f /tmp/debezium-server-pod.yml
 ```
-    
-Create a RDI job:    
-Edit emp.yaml by updating the `server_name` with your CloudSQL PostgreSQL instance IP address::
+       
+Create a ConfigMap for the two RDI jobs for replicating order information from CloudSQL to Redis:
 ```bash
-source:
-  server_name: 104.154.225.134
-  db: postgres
-  table: emp
-transform:
-  - uses: rename_field
-    with:
-      fields:
-        - from_field: lname
-          to_field: last_name
-        - from_field: fname
-          to_field: first_name
-output:
-  - uses: redis.write
-    with:
-      connection: target
-      data_type: json
-      key:
-        expression: concat(['employees:',user_id])
-        language: jmespath
+kubectl create configmap redis-di-jobs --from-file=./rdi_jobs
 ```
-Create a ConfigMap for the job:
-```bash
-kubectl create configmap redis-di-jobs --from-file=./emp.yaml
-```
-    
+You might want to wait for 30 seconds or so before the configmap can be consumed by the RDI pod.     
 Deploy the RDI job:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
@@ -222,48 +198,14 @@ When prompted (RDI Database Password []:), enter `redis` then hit return
 You should see a similar output like below:
 ```
 Ingest Jobs
-+------+---------------+----------+--------+-------+-----------------+--------+-----+
-| Name | Server        | DB       | Schema | Table | Transformations | Filter | Key |
-+------+---------------+----------+--------+-------+-----------------+--------+-----+
-| emp  | 35.222.41.246 | postgres |        | emp   | Yes             | No     | Yes |
-+------+---------------+----------+--------+-------+-----------------+--------+-----+
++---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
+| Name          | Server   | DB        | Schema | Table         | Transformations | Filter | Key |
++---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
+| orders        | workshop | dbFashion |        | orders        | Yes             | No     | Yes |
+| orderProducts | workshop | dbFashion |        | orderProducts | Yes             | No     | No  |
++---------------+----------+-----------+--------+---------------+-----------------+--------+-----+
 ```
-       
-Create test data in CloudSQL PostgreSQL database (source):    
-```bash
-cat <<EOF > sql_batch_file.sql
-CREATE TABLE emp (
-	user_id serial PRIMARY KEY,
-	fname VARCHAR ( 50 ) NOT NULL,
-	lname VARCHAR ( 50 ) NOT NULL
-);
-insert into emp (fname, lname) values ('Gilbert', 'Lau');
-insert into emp (fname, lname) values ('Pete', 'Sampras');
-insert into emp (fname, lname) values ('Roger', 'Federer');
-insert into emp (fname, lname) values ('Novak', 'Djokovic');
-insert into emp (fname, lname) values ('Tiger', 'Woods');
-insert into emp (fname, lname) values ('Freddie', 'Mercury');
-insert into emp (fname, lname) values ('Michael', 'Jordan');
-EOF
-```
-Run the following command to populate test data:
-```
-gcloud sql connect $POSTGRESQL_INSTANCE --user postgres < sql_batch_file.sql
-```
-When prompted for password (Connecting to database with SQL user [postgres].Password:), enter `postgres` and hit return    
-On success, you should see the following output:
-```
-Connecting to database with SQL user [postgres].Password: 
-CREATE TABLE
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-INSERT 0 1
-```
-            
+               
 Verify the job status in RDI:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
@@ -271,18 +213,18 @@ kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 When prompted (RDI Database Password []:), enter `redis` then hit return    
 You should see a similar output like below:         
 ```
-Status of Redis Data Integration version 0.101.3 on 10.96.1.6:12001
+Status of Redis Data Integration version 0.101.3 on 10.96.0.22:12001
 
 started
 
 Engine State
 Sync mode: cdc
-Last data retrieved (source): 07/10/2023 06:28:38.000000 
-Last data updated (target): 07/10/2023 06:28:38.640780 
+Last data retrieved (source): 07/22/2023 23:26:56.000000 
+Last data updated (target): 07/22/2023 23:26:57.075254 
 Last snapshot:
   Number of processes: 4
-  Start: 07/10/2023 06:03:29.564514 
-  End: still running
+  Start: 07/22/2023 21:26:12.722103 
+  End: 07/22/2023 21:30:34.350942 
 
 Connections
 +--------+-------+--------------------------------------------------------+-------+----------+---------+----------+-----------+
@@ -292,28 +234,28 @@ Connections
 +--------+-------+--------------------------------------------------------+-------+----------+---------+----------+-----------+
 
 Clients
-+------------+-----------------+---------------------+-----------+------------+---------+
-| ID         | ADDR            | Name                | Age (sec) | Idle (sec) | User    |
-+------------+-----------------+---------------------+-----------+------------+---------+
-| 4121001001 | 10.96.1.7:53802 | redis-di-cli        | 0         | 0          | default |
-| 870001002  | 10.96.1.8:37510 | debezium:redis:sink | 1649      | 138        | default |
-| 873001002  | 10.96.1.8:37540 | debezium:offsets    | 1648      | 138        | default |
-+------------+-----------------+---------------------+-----------+------------+---------+
++-------------+------------------+---------------------+-----------+------------+---------+
+| ID          | ADDR             | Name                | Age (sec) | Idle (sec) | User    |
++-------------+------------------+---------------------+-----------+------------+---------+
+| 4897001001  | 10.96.0.38:57828 | debezium:redis:sink | 15325     | 8077       | default |
+| 4900001001  | 10.96.0.38:46570 | debezium:offsets    | 15324     | 8077       | default |
+| 34913001002 | 10.96.0.23:60282 | redis-di-cli        | 1         | 0          | default |
++-------------+------------------+---------------------+-----------+------------+---------+
 
 Ingested Data Streams
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| Name                          | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| data:35.222.41.246.public.emp | 7     | 0       | 7        | 0       | 0       | 0        | 0        |
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
++------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| Name                                     | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
++------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| data:35.226.110.120.public.products      | 95    | 0       | 95       | 0       | 0       | 0        | 0        |
+| data:35.226.110.120.public.orders        | 8     | 0       | 8        | 0       | 0       | 0        | 0        |
+| data:35.226.110.120.public.orderProducts | 12    | 0       | 12       | 0       | 0       | 0        | 0        |
++------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
 
 Offsets
- ["redis",{"server":"35.222.41.246"}]: {"transaction_id":null,"lsn_proc":28269984,"messageType":"INSERT","lsn_commit":28232904,"lsn":28269984,"txId":1368,"ts_usec":1688970517998472}
+ ["redis",{"server":"35.226.110.120"}]: {"transaction_id":null,"lsn_proc":28960520,"messageType":"INSERT","lsn_commit":28943568,"lsn":28960520,"txId":2558,"ts_usec":1690068416681383}
 
 Performance Statistics per Batch (batch size: 2000)
-  Last run(s) duration (ms): [3]
-  Average run duration (ms): 111.00
+  Last run(s) duration (ms): [4]
+  Average run duration (ms): 2.00
 ```
-    
-Now, the RDI Ingest with CloudSQL PostgreSQL as `source` and fully managed Redis Enterprise database as `target` for order information has been set up properly.
-     
+

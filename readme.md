@@ -51,12 +51,11 @@ Part 1: Development and Deployment Labs - Part I
 Part 2: Development and Deployment Labs - Part II
 * [Lab 4:](./lab4/) Create a Google Cloud Build Trigger and Deploy the Sample App
 * [Lab 5:](./lab5/) Set up Redis Data Integration (RDI)
-* [Lab 6:](./lab6/) Update the Google Cloud Trigger with new CloudSQL PostgreSQL connection
-* [Lab 7:](./lab7/) Re-deploy the sample app with new CloudSQL PostgreSQL backend along with RDI
-* [Lab 8:](./lab8/) Microservices Observability Walkthrough
+* [Lab 6:](./lab6/) Re-deploy the sample app using the CloudSQL PostgreSQL backend along with Redis Data Integration
+* [Lab 7:](./lab7/) Microservices Observability Walkthrough
     
 Part 3: Gen AI powered applications - How Gen AI + Redis VSS can work together
-* [Lab 9:](./lab9/qa_vertex_redis.ipynb) Document Question Answering with Langchain, VertexAI and Redis
+* [Lab 8:](./lab8/qa_vertex_redis.ipynb) Document Question Answering with Langchain, VertexAI and Redis
       
 
      
