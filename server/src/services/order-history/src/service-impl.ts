@@ -37,6 +37,13 @@ const convertNestedProductsObjToArray = (orders: Partial<IOrder>[]) => {
     for (let ord of orders) {
       if (ord.products && Object.values(ord.products)?.length) {
         ord.products = Object.values(ord.products);
+        console.log("ord.products = " + ord.products);
+        for (let product of ord.products) {
+          console.log("type of product = " + typeof(product));
+          console.log("product = " + product);
+          console.log("type of product.productData = " + typeof(product.productData));
+          console.log("product = " + product.productData);
+        }
       }
     }
   }
