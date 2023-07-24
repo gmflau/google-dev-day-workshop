@@ -126,7 +126,8 @@ Create a ConfigMap for Redis Data Integration:
 ```bash
 kubectl create configmap redis-di-config --from-file=config.yaml -n default
 ```
-    
+You might need to wait for 30 seconds or more for the configmap to be ready for next step. 
+        
 Deploy the RDI configuration:   
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
@@ -144,7 +145,8 @@ Create a ConfigMap for Debezium Server:
 ```bash
 kubectl create configmap debezium-config --from-file=application.properties -n default
 ```    
-    
+You might need to wait for 30 seconds or more for the configmap to be ready for next step. 
+      
 Create the Debezium Server Pod:
 ```bash
 cat << EOF > /tmp/debezium-server-pod.yml
@@ -181,7 +183,7 @@ Create a ConfigMap for the two RDI jobs for replicating order information from C
 ```bash
 kubectl create configmap redis-di-jobs --from-file=./rdi_jobs
 ```
-You might want to wait for 30 seconds or so before the configmap can be consumed by the RDI pod.     
+You will need to wait for 30 seconds or so before the configmap can be consumed by the RDI pod.     
 Deploy the RDI job:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di deploy
@@ -252,13 +254,11 @@ Clients
 +-------------+------------------+---------------------+-----------+------------+---------+
 
 Ingested Data Streams
-+------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| Name                                     | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
-+------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| data:35.226.110.120.public.products      | 95    | 0       | 95       | 0       | 0       | 0        | 0        |
-| data:35.226.110.120.public.orders        | 8     | 0       | 8        | 0       | 0       | 0        | 0        |
-| data:35.226.110.120.public.orderProducts | 12    | 0       | 12       | 0       | 0       | 0        | 0        |
-+------------------------------------------+-------+---------+----------+---------+---------+----------+----------+
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| Name                          | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| data:workshop.public.products | 94    | 0       | 94       | 0       | 0       | 0        | 0        |
++-------------------------------+-------+---------+----------+---------+---------+----------+----------+
 
 Offsets
  ["redis",{"server":"35.226.110.120"}]: {"transaction_id":null,"lsn_proc":28960520,"messageType":"INSERT","lsn_commit":28943568,"lsn":28960520,"txId":2558,"ts_usec":1690068416681383}
