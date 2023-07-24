@@ -43,6 +43,7 @@ const convertNestedProductsObjToArray = (orders: Partial<IOrder>[]) => {
           console.log("product = " + product);
           console.log("type of product.productData = " + typeof(product.productData));
           console.log("product = " + product.productData);
+          product.productData = JSON.parse(product.productData);
         }
       }
     }
