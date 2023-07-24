@@ -8,12 +8,12 @@ transform:
         orderStatusCode: orderStatusCode
         potentialFraud: potentialFraud
         userId: userId
-        createdOn: createdOn
+        createdOn: createdOn / 1000.0
         createdBy: createdBy
-        lastUpdatedOn: lastUpdatedOn
+        lastUpdatedOn: lastUpdatedOn / 1000.0
         lastUpdatedBy: lastupdatedBy
         statusCode: statusCode
-      language: jmespath
+      language: sql
 output:
   - uses: redis.write
     with:
