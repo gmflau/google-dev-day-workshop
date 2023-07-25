@@ -10,10 +10,11 @@ Once you successfully log into your Google Cloud account, you can open a Cloud S
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
 ![Google Cloud Shell](./img/GCP_Cloud_Shell_Screen.png)
       
-Run the following commands to enable service APIs required for this workshop
-Set the project value:
+Run the following commands to enable service APIs required for this workshop.    
+Set the following project values:
 ```bash
 gcloud config set project <YOUR PROJECT ID>
+export PROJECT_ID=<YOUR PROJECT ID>
 ```
 Run the followings to enable Google Cloud service APIs:
 ```bash
