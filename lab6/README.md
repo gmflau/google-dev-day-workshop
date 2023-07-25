@@ -49,7 +49,8 @@ For example,
 service/client          LoadBalancer   10.100.5.142    35.184.250.110   4200:30519/TCP   2m25s
 ```
       
-When you try to access `Orders` History now, the order history information is replicated from CloudSQL (PostgreSQL) to Redis by RDI. 
+When you try to access `Orders History` now, the order history information is replicated from CloudSQL (PostgreSQL) to Redis by RDI. 
+![Order history](./img/order_history.png)   
      
 You can view the data replication transactions from CloudSQL (PostgreSQL) as source to Redis as target using the command below:
 ```bash
