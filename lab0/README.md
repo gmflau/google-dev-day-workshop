@@ -14,10 +14,10 @@ Run the following commands to enable service APIs required for this workshop.
 Set the following project values:
 ```bash
 gcloud config set project <YOUR PROJECT ID>
-export PROJECT_ID=<YOUR PROJECT ID>
 ```
 Run the followings to enable Google Cloud service APIs:
 ```bash
+export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gcloud services enable sourcerepo.googleapis.com
 gcloud services enable compute.googleapis.com
 gcloud services enable container.googleapis.com
