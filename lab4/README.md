@@ -38,7 +38,7 @@ A successful build will look like the following:
    
 Run the following command to ensure all the microservices are up and running:
 ```bash
-kubectl get all
+watch kubectl get all
 ```
 You will also find the REDIS_CLIENT_HOST_IP information from the command above:
 ```

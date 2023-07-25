@@ -6,7 +6,6 @@ transform:
       expression:
         orderId: _id
         orderStatusCode: orderStatusCode
-        potentialFraud: potentialFraud
         userId: userId
         createdOn: createdOn / 1000.0
         createdBy: createdBy
