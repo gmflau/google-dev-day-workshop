@@ -36,6 +36,9 @@ On success, you should see a similar build-in-process like below:
 A successful build will look like the following:
 ![CB Trigger Build Success](./img/CB_Trigger_Build_Success.png)
    
+You can verify the container images are published to your private container registry like below:
+![Container registry](./img/container_registry.png)
+        
 Run the following command to ensure all the microservices are up and running:
 ```bash
 watch kubectl get all

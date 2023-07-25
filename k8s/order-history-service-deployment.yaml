@@ -150,7 +150,7 @@ spec:
                 configMapKeyRef:
                   key: IS_RDI_ENABLED
                   name: env
-          image: gcr.io/central-beach-194106/redis-ms-cqrs-order_history_service:latest
+          image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-order_history_service:latest
           imagePullPolicy: Always
           name: order-history-service
           ports:

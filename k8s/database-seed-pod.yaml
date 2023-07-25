@@ -131,7 +131,7 @@ spec:
             configMapKeyRef:
               key: REDIS_INSIGHT_PORT
               name: env
-      image: gcr.io/central-beach-194106/redis-ms-cqrs-database_seed:latest
+      image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-database_seed:latest
       imagePullPolicy: Always
       name: database-seed
       resources: {}

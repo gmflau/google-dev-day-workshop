@@ -68,7 +68,7 @@ steps:
         --zone ${_GKE_ZONE}
 
       # Deploy env and db-seed
-      kubectl apply -f ./k8s -n default
+      for f in k8s/*.yaml; do envsubst < $f | kubectl apply -n default -f -; done
 
 substitutions:
     _GKE_CLUSTER: gke-cluster
