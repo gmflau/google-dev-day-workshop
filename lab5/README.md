@@ -24,7 +24,11 @@ EOF
 
 kubectl apply -f rec.yaml -n redis 
 ```
-It will take between 6 and 8 minutes to complete.        
+It will take between 6 and 8 minutes to complete. You can run the following command to see the progress:
+```bash
+watch kubectl get all
+```    
+    
 Then, retrieve the password for the Redis Enterprise Cluster's default uesr: demo@redis.com:
 ```bash
 export REC_PWD=$(kubectl get secrets -n redis rec -o jsonpath="{.data.password}" | base64 --decode)
@@ -254,11 +258,13 @@ Clients
 +-------------+------------------+---------------------+-----------+------------+---------+
 
 Ingested Data Streams
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| Name                          | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
-| data:workshop.public.products | 94    | 0       | 94       | 0       | 0       | 0        | 0        |
-+-------------------------------+-------+---------+----------+---------+---------+----------+----------+
++------------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| Name                               | Total | Pending | Inserted | Updated | Deleted | Filtered | Rejected |
++------------------------------------+-------+---------+----------+---------+---------+----------+----------+
+| data:workshop.public.products      | 95    | 0       | 95       | 0       | 0       | 0        | 0        |
+| data:workshop.public.orders        | 2     | 0       | 2        | 0       | 0       | 0        | 0        |
+| data:workshop.public.orderProducts | 3     | 0       | 3        | 0       | 0       | 0        | 0        |
++------------------------------------+-------+---------+----------+---------+---------+----------+----------+
 
 Offsets
  ["redis",{"server":"35.226.110.120"}]: {"transaction_id":null,"lsn_proc":28960520,"messageType":"INSERT","lsn_commit":28943568,"lsn":28960520,"txId":2558,"ts_usec":1690068416681383}

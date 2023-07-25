@@ -2,12 +2,12 @@
 
 Delete the current application deployment:
 ```bash
-kubectl delete -k k8s
+kubectl delete -f k8s
 ```
 
 Delete the existing Cloud Build trigger:
 ```bash
-gcloud alpha builds triggers delete $REDIS_CLOUD_BUILD_TRIGGER
+gcloud alpha builds triggers delete $REDIS_CLOUD_BUILD_TRIGGER --region=$CLUSTER_LOCATION
 ```
           
 Deploy a new Trigger with IS_RDI_ENABLED = "true":
@@ -35,11 +35,23 @@ Run the trigger to deploy the sample app:
 ```bash
 gcloud alpha builds triggers run $REDIS_CLOUD_BUILD_TRIGGER --branch=master --region=$CLUSTER_LOCATION
 ```
-              
+It will take about 9 or more minutes to complete the build and deployment of the microservices application. You can check the progress in Google Cloud Console's Cloud Build page:
+![Cloud Build Page](./img/cb_progress.png)
+                  
 Once the application is deployed, You can now access the sample app and make a few purchases by pointing your browser at:
 ```
 http://<$REDIS_CLIENT_HOST_IP>:4200
 ```
-    
+You can find the REDIS_CLIENT_HOST_IP by running the following command:
+```bash
+kubectl get all
+```
+Look for the line item starting with `service/client`:
+```
+For example, 
+
+service/client          LoadBalancer   10.100.5.142    35.184.250.110   4200:30519/TCP   2m25s
+```
+      
 When you try to access `Orders` History now, the order history information is replicated from CloudSQL (PostgreSQL) to Redis by RDI. 
   

@@ -44,7 +44,7 @@ SAMPLE ORDER
 }
 
 */
-const ORDER_KEY_PREFIX = 'orders:orderId';
+const ORDER_KEY_PREFIX = 'Orders';
 
 const schema = new RedisSchema(ORDER_KEY_PREFIX, {
   orderId: { type: 'string', indexed: true },//--

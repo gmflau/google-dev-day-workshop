@@ -35,7 +35,18 @@ On success, you should see a similar build-in-process like below:
     
 A successful build will look like the following:
 ![CB Trigger Build Success](./img/CB_Trigger_Build_Success.png)
-     
+   
+Run the following command to ensure all the microservices are up and running:
+```bash
+kubectl get all
+```
+You will also find the REDIS_CLIENT_HOST_IP information from the command above:
+```
+For example,
+
+service/client          LoadBalancer   10.100.5.142    35.184.250.110   4200:30519/TCP   2m25s
+```
+        
 You can now access the sample app and make a few purchases by pointing your browser at:
 ```bash
 http://<$REDIS_CLIENT_HOST_IP>:4200
