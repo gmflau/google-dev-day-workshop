@@ -9,6 +9,7 @@ gcloud services enable sourcerepo.googleapis.com
 gcloud services enable compute.googleapis.com
 gcloud services enable container.googleapis.com
 gcloud services enable anthos.googleapis.com
+gcloud services enable meshca.googleapis.com
 gcloud services enable sqladmin.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
 PROJECT_NUMBER="$(gcloud projects describe ${PROJECT_ID} --format='get(projectNumber)')"
