@@ -145,7 +145,7 @@ spec:
                 configMapKeyRef:
                   key: REDIS_INSIGHT_PORT
                   name: env
-          image: gcr.io/{PROJECT_ID}/redis-ms-cqrs-client:latest
+          image: gcr.io/${PROJECT_ID}/redis-ms-cqrs-client:latest
           imagePullPolicy: Always
           name: client
           ports:
