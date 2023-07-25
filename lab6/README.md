@@ -42,11 +42,7 @@ Once the application is deployed, You can now access the sample app and make a f
 ```
 http://<$REDIS_CLIENT_HOST_IP>:4200
 ```
-You can find the REDIS_CLIENT_HOST_IP by running the following command:
-```bash
-kubectl get all
-```
-Look for the line item starting with `service/client`:
+You can find the REDIS_CLIENT_HOST_IP by running this command `kubectl get all` and look for the line item starting with **service/client**:
 ```
 For example, 
 
