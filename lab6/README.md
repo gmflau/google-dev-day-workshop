@@ -55,7 +55,7 @@ service/client          LoadBalancer   10.100.5.142    35.184.250.110   4200:305
       
 When you try to access `Orders` History now, the order history information is replicated from CloudSQL (PostgreSQL) to Redis by RDI. 
      
-You can view the data replication transactions from CloudSQL (PostgreSQL) as source to Redis as target using the command:
+You can view the data replication transactions from CloudSQL (PostgreSQL) as source to Redis as target using the command below:
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 ```
