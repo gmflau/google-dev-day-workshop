@@ -1,10 +1,7 @@
 # Lab 5: Set up Redis Data Integration (RDI)
 
 ![RDI - CloudSQL](./img/RDI_Ingest_cloudsql.png)
-    
-#### 1. Provision a CloudSQL PostgreSQL instance:
-
-#### 2. Deploy Radis Data Integration:
+        
 Deploy a Redis Enterprise cluster:
 ```bash
 kubectl create namespace redis
