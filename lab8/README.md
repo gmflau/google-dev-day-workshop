@@ -1,4 +1,4 @@
 # Lab 8: Document Question Answering with Langchain, VertexAI and Redis
 
-Access the [colab](./qa_vertex_redis.ipynb) for this lab
+Access the [colab](./qa_vertex_ai_redis.ipynb) for this lab
 
