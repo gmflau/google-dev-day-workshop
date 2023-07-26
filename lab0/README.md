@@ -31,4 +31,4 @@ gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
 gcloud services enable aiplatform.googleapis.com
 ```
           
-[>> Next Lab >>](../lab1/README.md)    
+[>> Next Lab (1) >>](../lab1/README.md)    

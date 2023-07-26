@@ -2,5 +2,5 @@
 Explore the microservices inside Google Cloud Console:
 ![ASM SM Topology](./img/ASM_SM_Topology.png)
      
-[<< Previous Lab <<](../lab6/README.md)     |      [>> Next Lab >>](../lab8/README.md)
+[<< Previous Lab (6) <<](../lab6/README.md)     |      [>> Next Lab (8) >>](../lab8/README.md)
 

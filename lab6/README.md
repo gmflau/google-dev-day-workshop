@@ -57,5 +57,5 @@ You can view the data replication transactions from CloudSQL (PostgreSQL) as sou
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 ```
       
-[<< Previous Lab <<](../lab5/README.md)     |      [>> Next Lab >>](../lab7/README.md)
+[<< Previous Lab (5) <<](../lab5/README.md)     |      [>> Next Lab (7) >>](../lab7/README.md)
 

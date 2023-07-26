@@ -274,4 +274,4 @@ Performance Statistics per Batch (batch size: 2000)
   Average run duration (ms): 2.00
 ```
       
-[<< Previous Lab <<](../lab4/README.md)     |      [>> Next Lab >>](../lab6/README.md)
+[<< Previous Lab (4) <<](../lab4/README.md)     |      [>> Next Lab (6) >>](../lab6/README.md)

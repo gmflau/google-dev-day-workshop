@@ -159,5 +159,5 @@ Connecting to database with SQL user [postgres].Password:
 ALTER ROLE
 ```
     
-[<< Previous Lab <<](../lab1/README.md)     |      [>> Next Lab >>](../lab3/README.md)
+[<< Previous Lab (1) <<](../lab1/README.md)     |      [>> Next Lab (3) >>](../lab3/README.md)
 

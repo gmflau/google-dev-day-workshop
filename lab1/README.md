@@ -22,4 +22,4 @@ git push -u origin master
 You can confirm the repo has been successfully created in Google Cloud Console:
 ![Cloud Sources Repo](./img/Cloud_Sources_Repo.png)
      
-[<< Previous Lab <<](../lab0/README.md)     |      [>> Next Lab >>](../lab2/README.md)
+[<< Previous Lab (0) <<](../lab0/README.md)     |      [>> Next Lab (2) >>](../lab2/README.md)

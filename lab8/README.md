@@ -2,4 +2,4 @@
 
 Access the [colab](./VertexAI_LangChain_Redis.ipynb) for this lab
      
-[<< Previous Lab <<](../lab7/README.md)
+[<< Previous Lab (7) <<](../lab7/README.md)

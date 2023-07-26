@@ -60,5 +60,5 @@ After making a couple purchases, here is a sample screen shot of the order histo
 ![Order History](./img/Order_History.png)
 The order history data is retrieved from Redis Enterprise (in-memory).
      
-[<< Previous Lab <<](../lab3/README.md)     |      [>> Next Lab >>](../lab5/README.md)
+[<< Previous Lab (3) <<](../lab3/README.md)     |      [>> Next Lab (5) >>](../lab5/README.md)
 
