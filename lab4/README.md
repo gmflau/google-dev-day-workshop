@@ -59,5 +59,6 @@ http://<$REDIS_CLIENT_HOST_IP>:4200
 After making a couple purchases, here is a sample screen shot of the order history page:
 ![Order History](./img/Order_History.png)
 The order history data is retrieved from Redis Enterprise (in-memory).
-
+     
+[<< Previous Lab <<](../lab3/README.md)     |      [>> Next Lab >>](../lab5/README.md)
 

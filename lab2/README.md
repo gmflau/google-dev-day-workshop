@@ -158,3 +158,6 @@ On success, you should see the following output:
 Connecting to database with SQL user [postgres].Password:
 ALTER ROLE
 ```
+    
+[<< Previous Lab <<](../lab1/README.md)     |      [>> Next Lab >>](../lab3/README.md)
+
