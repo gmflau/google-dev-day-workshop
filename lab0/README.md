@@ -10,8 +10,7 @@ Once you successfully log into your Google Cloud account, you can open a Cloud S
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
 ![Google Cloud Shell](./img/GCP_Cloud_Shell_Screen.png)
       
-Run the following commands to enable service APIs required for this workshop.    
-Set the following project values:
+Set the following project value:
 ```bash
 gcloud config set project <YOUR PROJECT ID>
 ```
@@ -31,3 +30,5 @@ gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
     --role=roles/container.developer
 gcloud services enable aiplatform.googleapis.com
 ```
+    
+**Next Page**(../lab1/README.md)
