@@ -1,9 +1,5 @@
 # Lab 1: Create a Cloud Source repo for the workshop sample app
-
-Set your GCP Project:
-```bash
-gcloud config set project <PROJECT_ID>
-```
+    
 Create a new Cloud Source repo:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
