@@ -56,6 +56,9 @@ You can view the data replication transactions from CloudSQL (PostgreSQL) as sou
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 ```
-      
+   
+In [RedisInsight](https://redis.com/redis-enterprise/redis-insight/), you can see `orders` information is replicated to Redis Enterpirse from CloudSQL (PostgreSQL) by RDI.
+![RI RDI](./img/RI_RDI.png)
+       
 [<< Previous Lab (5) <<](../lab5/README.md)     |      [>> Next Lab (7) >>](../lab7/README.md)
 
