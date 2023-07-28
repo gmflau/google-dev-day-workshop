@@ -1,5 +1,15 @@
 # Lab 1: Create a Cloud Source repo for the workshop sample app
     
+Set the following values:
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+For example,
+git config --global user.email "gmflau007@gmail.com"
+git config --global user.name "Gilbert"
+```
+        
 Create a new Cloud Source repo:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
