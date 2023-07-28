@@ -30,7 +30,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
     --role=roles/container.developer
 gcloud services enable aiplatform.googleapis.com
 ```
-Once all APIs are enabled, you should see similar output in your Cloud Shell below:
+Once all APIs are enabled, you should see similar output below in your Cloud Shell:
 ![API enabled](./img/api_enabled.png)   
              
 [>> Next Lab (1) >>](../lab1/README.md)    
