@@ -1,4 +1,4 @@
-# Lab 6:  Re-deploy the sample app using the CloudSQL PostgreSQL backend along with Redis Data Integration
+# Lab 6:  Re-deploy the sample app using the CloudSQL PostgreSQL backend and Redis Data Integration
 
 Delete the current application deployment:
 ```bash
