@@ -22,6 +22,22 @@ export REDIS_TARGET_DB_HOST=<Redis Target db endpoint>
 export REDIS_TARGET_DB_PORT=<Redis Target db endpoint port>
 export REDIS_TARGET_DB_PASSWORD=<Redis Target db password>
 ```
-      
-[<< Previous Lab (2) <<](../lab2/README.md)     |      [>> Next Lab (4) >>](../lab4/README.md)
+For example,
 
+```
+export REDIS_TARGET_DB_HOST=redis-10996.c279.us-central1-1.gce.cloud.redislabs.com
+export REDIS_TARGET_DB_PORT=10996
+export REDIS_TARGET_DB_PASSWORD=jaS5xwkDhM14Nfjg4V1cmcxSPTyuexbr
+```
+
+Verify that these environment variables are correctly set, by printing them to the console. If any variable missing, ensure to reset it using `export` commands shown above.
+```
+echo $REDIS_URI
+echo $REDIS_INSIGHT_PORT
+echo $REDIS_TARGET_DB_HOST
+echo $REDIS_TARGET_DB_PORT
+echo $REDIS_TARGET_DB_PASSWORD
+```   
+
+
+[<< Previous Lab (2) <<](../lab2/README.md)     |      [>> Next Lab (4) >>](../lab4/README.md)
