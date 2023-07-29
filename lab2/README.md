@@ -1,5 +1,12 @@
 # Lab 2: Create Google Cloud Infrastrcuture Components
-
+     
+In this lab, you are going to:
+* Create a VPC
+* Create two external static IP addresses
+* Create a GKE cluster
+* Provision managed Anthos Service Mesh on the GKE cluster
+* Create a CloudSQL PostgreSQL database instance
+          
 Create a VPC:
 ```bash
 export VPC_NETWORK="redis-vpc-network"

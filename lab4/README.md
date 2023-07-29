@@ -1,4 +1,10 @@
 # Lab 4: Create a Google Cloud Build Trigger and Deploy the Sample App
+    
+In this lab, you are going to:
+* Create a Cloud Build trigger
+* Execute the Cloud Build trigger to deploy the sample app
+* Access the sample app to create a few orders and view the order history
+    
 Create Cloud Build Trigger:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')

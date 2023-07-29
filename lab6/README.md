@@ -1,5 +1,9 @@
 # Lab 6:  Re-deploy the sample app using the CloudSQL PostgreSQL backend and Redis Data Integration
-
+    
+In this lab, you are going to:
+* Replace the existing Cloud Build Trigger to use RDI
+* Access the sample app to create a few orders and view the order history
+       
 Delete the current application deployment:
 ```bash
 kubectl delete -f k8s

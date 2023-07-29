@@ -1,5 +1,9 @@
 # Lab 5: Set up Redis Data Integration (RDI)
-
+    
+In this lab, you are going to:
+* Set up Redis Data Integration (RDI)
+* Create & Deploy two RDI jobs to replicate data from a CloudSQL PostgreSQL database to Redis Enterprise
+     
 ![RDI - CloudSQL](./img/RDI_Ingest_cloudsql.png)
         
 Deploy a Redis Enterprise cluster:

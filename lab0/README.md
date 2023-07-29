@@ -1,5 +1,10 @@
 # Lab 0: Open a Google Cloud Shell and Enable APIs
-
+     
+In this lab, you are going to:
+* Create a free trial Google Cloud account with $300 credit
+* Open a Cloud Shell for the workshop labs
+* Enable required Google Cloud service APIs for the workshop labs
+     
 If you do not have an existing Google Cloud account, you can create a free trial account with $300 credit. Detail is [here]( https://cloud.google.com/free/docs/free-cloud-features#free-trial). Start Free [here](https://cloud.google.com/)!
    
 **It is recommend to create a new Google Cloud project for this workshop as it is easier to clean up upon completion.** 

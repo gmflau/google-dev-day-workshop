@@ -1,4 +1,9 @@
 # Lab 3: Create a Redis Enterprise Cloud subscription on Google Cloud
+    
+In this lab, you are going to:
+* Create a Redis Enterprise Cloud subscription
+* Collect Redis Enterprise Database connection information
+    
 Create a Redis Cloud subscription:
 * Follow this [link](https://docs.redis.com/latest/rc/rc-quickstart/#create-an-account) through step 6.
 * In step 4, choose Google Cloud. Then come back here to continue on section 3 below to initialize two environments for this workshop.
