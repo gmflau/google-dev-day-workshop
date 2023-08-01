@@ -1,12 +1,12 @@
 # Lab 2: Create Google Cloud Infrastrcuture Components
-     
+
 In this lab, you are going to:
 * Create a VPC
 * Create two external static IP addresses
-* Create a GKE cluster
+* Create a GKE cluster in the VPC created in the first step
 * Provision managed Anthos Service Mesh on the GKE cluster
 * Create a CloudSQL PostgreSQL database instance
-          
+
 Create a VPC:
 ```bash
 export VPC_NETWORK="redis-vpc-network"
@@ -14,10 +14,10 @@ export SUBNETWORK=$VPC_NETWORK
 gcloud compute networks create $VPC_NETWORK \
     --subnet-mode=auto
 ```
-     
+
 On success, you should view your VPC network as follows:
 ![VPC Network](./img/Redis_VPC_Network.png)
-    
+
 
 Reserve external static IP addresses:
 ```bash
@@ -29,9 +29,16 @@ gcloud compute addresses create redis-client-host-ip --region us-central1
 export REDIS_CLIENT_HOST_IP="$(gcloud compute addresses describe redis-client-host-ip --region=us-central1 --format='value(address)')"
 ```    
 
+Make sure above static IP addresses are acquired by printing the values to the console.
+
+```
+echo $REDIS_API_GATEWAY_IP
+echo $REDIS_CLIENT_HOST_IP
+```
+
 On success, you should see the newly created reserved public IP addresses as shown below:
 ![Reserved IPs](./img/reserved_ips.png)   
-     
+
 Create a GKE cluster:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
@@ -50,9 +57,10 @@ gcloud container clusters create $CLUSTER_NAME \
     --labels="mesh_id=proj-${PROJECT_NUMBER}"
 ```
 
+The GKE cluster creation can take anywhere between 5 to 10 minutes.
 On success, you should see your newly created GKE cluster like below:
 ![GKE](./img/GKE_Cluster.png)
-         
+
 Provision Anthos Service Mesh:    
 Enable Anthos Service Mesh on your project's Fleet:
 ```bash
@@ -67,7 +75,7 @@ gcloud container fleet memberships register $CLUSTER_NAME-membership \
 ```
 On success, you can verify the GKE cluster's fleet membership in Google Cloud Console:
 ![ASM Fleet Membership](./img/ASM_Fleet_Membership_Reg.png)
-         
+
 Provision managed Anthos Service Mesh on the cluster using the Fleet API:
 ```bash
 gcloud container fleet mesh update \
@@ -126,7 +134,7 @@ spec:
 status:
   phase: Active
 ```
-    
+
 Create the Source DB - Cloud SQL for PostgreSQL:    
 Note: **database-flags=cloudsql.logical_decoding=on** enables logical replication workflows and change data capture (CDC) workflows which is required by RDI.     
 Create PostgreSQL instance:   
@@ -143,13 +151,15 @@ gcloud sql instances create $POSTGRESQL_INSTANCE \
 --root-password=postgres \
 --database-flags=cloudsql.logical_decoding=on
 ```
+The above command may take anywhere from 5 to 10mins to finish and create a PostgresSQL instance for you.
+
 On success, you can see your CloudSQL PostgreSQL database in Google Cloud console like the following:
 ![Cloud SQL](./img/CloudSQL.png)
 Capture the `Public IP address` for later use in the lab in an environment variable:
 ```bash
 export POSTGRESQL_INSTANCE_IP=$(gcloud sql instances describe $POSTGRESQL_INSTANCE --format=json | jq -r '.ipAddresses[] | select(.type == "PRIMARY") | .ipAddress')
 ```
-                
+
 By default, PostgreSQL database superuser (postgres) does not have permission to create a replication slot which is required by RDI.  Run the following commands to grant the permission:  
 ```bash
 cat <<EOF > alter_postgres_replication.sql
@@ -165,6 +175,5 @@ On success, you should see the following output:
 Connecting to database with SQL user [postgres].Password:
 ALTER ROLE
 ```
-    
-[<< Previous Lab (1) <<](../lab1/README.md)     |      [>> Next Lab (3) >>](../lab3/README.md)
 
+[<< Previous Lab (1) <<](../lab1/README.md)     |      [>> Next Lab (3) >>](../lab3/README.md)
