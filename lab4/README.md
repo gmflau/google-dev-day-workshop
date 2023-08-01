@@ -1,4 +1,10 @@
 # Lab 4: Create a Google Cloud Build Trigger and Deploy the Sample App
+    
+In this lab, you are going to:
+* Create a Cloud Build trigger
+* Execute the Cloud Build trigger to deploy the sample app
+* Access the sample app to create a few orders and view the order history
+    
 Create Cloud Build Trigger:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
@@ -59,5 +65,6 @@ http://<$REDIS_CLIENT_HOST_IP>:4200
 After making a couple purchases, here is a sample screen shot of the order history page:
 ![Order History](./img/Order_History.png)
 The order history data is retrieved from Redis Enterprise (in-memory).
-
+     
+[<< Previous Lab (3) <<](../lab3/README.md)     |      [>> Next Lab (5) >>](../lab5/README.md)
 

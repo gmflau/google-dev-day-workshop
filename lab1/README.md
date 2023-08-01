@@ -1,5 +1,19 @@
 # Lab 1: Create a Cloud Source repo for the workshop sample app
-    
+     
+In this lab, you are going to:
+* Create a Clould Source repo
+* Download and install the lab source files to the repo
+        
+Set the following values:
+```bash
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+For example,
+git config --global user.email "gmflau007@gmail.com"
+git config --global user.name "Gilbert"
+```
+        
 Create a new Cloud Source repo:
 ```bash
 export PROJECT_ID=$(gcloud info --format='value(config.project)')
@@ -21,3 +35,5 @@ git push -u origin master
 ```
 You can confirm the repo has been successfully created in Google Cloud Console:
 ![Cloud Sources Repo](./img/Cloud_Sources_Repo.png)
+     
+[<< Previous Lab (0) <<](../lab0/README.md)     |      [>> Next Lab (2) >>](../lab2/README.md)

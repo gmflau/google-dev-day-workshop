@@ -1,5 +1,9 @@
-# Lab 6:  Re-deploy the sample app using the CloudSQL PostgreSQL backend along with Redis Data Integration
-
+# Lab 6:  Re-deploy the sample app using the CloudSQL PostgreSQL backend and Redis Data Integration
+    
+In this lab, you are going to:
+* Replace the existing Cloud Build Trigger to use RDI
+* Access the sample app to create a few orders and view the order history
+       
 Delete the current application deployment:
 ```bash
 kubectl delete -f k8s
@@ -56,5 +60,10 @@ You can view the data replication transactions from CloudSQL (PostgreSQL) as sou
 ```bash
 kubectl exec -n default -it pod/redis-di-cli -- redis-di status
 ```
-
+   
+In [RedisInsight](https://redis.com/redis-enterprise/redis-insight/), you can see `orders` information is replicated to Redis Enterpirse from CloudSQL (PostgreSQL) by RDI.
+![RI RDI](./img/RI_RDI.png)
+You can download the Redis Insight [here](https://redis.com/redis-enterprise/redis-insight/#insight-form)
+       
+[<< Previous Lab (5) <<](../lab5/README.md)     |      [>> Next Lab (7) >>](../lab7/README.md)
 

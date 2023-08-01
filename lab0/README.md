@@ -1,5 +1,10 @@
 # Lab 0: Open a Google Cloud Shell and Enable APIs
-
+     
+In this lab, you are going to:
+* Create a free trial Google Cloud account with $300 credit
+* Open a Cloud Shell for the workshop labs
+* Enable required Google Cloud service APIs for the workshop labs
+     
 If you do not have an existing Google Cloud account, you can create a free trial account with $300 credit. Detail is [here]( https://cloud.google.com/free/docs/free-cloud-features#free-trial). Start Free [here](https://cloud.google.com/)!
    
 **It is recommend to create a new Google Cloud project for this workshop as it is easier to clean up upon completion.** 
@@ -10,8 +15,7 @@ Once you successfully log into your Google Cloud account, you can open a Cloud S
 [![Cloud Shell](./img/GCP_Cloud_Shell.png)](https://shell.cloud.google.com/)
 ![Google Cloud Shell](./img/GCP_Cloud_Shell_Screen.png)
       
-Run the following commands to enable service APIs required for this workshop.    
-Set the following project values:
+Set the following project value:
 ```bash
 gcloud config set project <YOUR PROJECT ID>
 ```
@@ -31,3 +35,7 @@ gcloud projects add-iam-policy-binding ${PROJECT_NUMBER} \
     --role=roles/container.developer
 gcloud services enable aiplatform.googleapis.com
 ```
+Once all APIs are enabled, you should see similar output below in your Cloud Shell:
+![API enabled](./img/api_enabled.png)   
+             
+[>> Next Lab (1) >>](../lab1/README.md)    
