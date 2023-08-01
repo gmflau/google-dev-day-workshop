@@ -9,11 +9,17 @@ export REDIS_CLOUD_BUILD_TRIGGER="redis-cb-trigger"
 
 # remove container images
 CONTAINER_REGISTRY=gcr.io/$PROJECT_ID
-gcloud container images list --repository=$CONTAINER_REGISTRY --format='get(name)' | grep "redis-ms-cqrs" > images_list.txt
+gcloud container images list --repository=$CONTAINER_REGISTRY --format='get(name)' | grep "redis-ms-cqrs" > images_list1.txt
 while read -r image; do
-    gcloud container images delete "$image" --force-delete-tags --quiet
-done < images_list.txt
-rm images_list.txt
+    echo "Y" | gcloud container images delete "$image" --force-delete-tags --quiet
+done < images_list1.txt
+
+CONTAINER_REGISTRY=gcr.io/$PROJECT_ID
+gcloud container images list --repository=$CONTAINER_REGISTRY --format='get(name)' | grep "redis-ms-cqrs" > images_list2.txt
+while read -r image; do
+    tag=`gcloud container images list-tags "$image" | grep DIGEST | awk '{ print $2 }'`
+    echo "Y" | gcloud container images delete "$image"@sha256:"$tag" --force-delete-tags --quiet
+done < images_list2.txt
 
 # remove Cloud Build trigger
 gcloud alpha builds triggers delete $REDIS_CLOUD_BUILD_TRIGGER --region=$CLUSTER_LOCATION
