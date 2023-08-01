@@ -32,7 +32,7 @@ It will take between 6 and 8 minutes to complete. You can run the following comm
 watch kubectl get all
 ```    
     
-Then, retrieve the password for the Redis Enterprise Cluster's default uesr: demo@redis.com:
+Then, retrieve the password for the Redis Enterprise Cluster's default user: demo@redis.com:
 ```bash
 export REC_PWD=$(kubectl get secrets -n redis rec -o jsonpath="{.data.password}" | base64 --decode)
 ```

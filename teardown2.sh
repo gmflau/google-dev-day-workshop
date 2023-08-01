@@ -7,6 +7,14 @@ export ZONE=us-central1-a
 export POSTGRESQL_INSTANCE=redis-postgresql-instance
 export REDIS_CLOUD_BUILD_TRIGGER="redis-cb-trigger"
 
+# remove container images
+CONTAINER_REGISTRY=gcr.io/$PROJECT_ID
+gcloud container images list --repository=$CONTAINER_REGISTRY --format='get(name)' | grep "redis-ms-cqrs" > images_list.txt
+while read -r image; do
+    gcloud container images delete "$image" --force-delete-tags --quiet
+done < images_list.txt
+rm images_list.txt
+
 # remove Cloud Build trigger
 gcloud alpha builds triggers delete $REDIS_CLOUD_BUILD_TRIGGER --region=$CLUSTER_LOCATION
 
