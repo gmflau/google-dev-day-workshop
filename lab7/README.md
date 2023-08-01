@@ -6,5 +6,7 @@ In this lab, you are going to:
 Explore the microservices inside Google Cloud Console:
 ![ASM SM Topology](./img/ASM_SM_Topology.png)
      
+**At this point, you can delete your Google Cloud project to avoid unnecessary charges to your billing account.**
+     
 [<< Previous Lab (6) <<](../lab6/README.md)     |      [>> Next Lab (8) >>](../lab8/README.md)
 
