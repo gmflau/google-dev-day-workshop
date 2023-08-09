@@ -1,7 +1,7 @@
 # Lab 1: Create a Cloud Source repo for the workshop sample app
      
 In this lab, you are going to:
-* Create a Clould Source repo
+* Create a Cloud Source repo
 * Download and install the lab source files to the repo
         
 Set the following values:
