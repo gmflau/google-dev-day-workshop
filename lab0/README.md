@@ -5,9 +5,9 @@ In this lab, you are going to:
 * Open a Cloud Shell for the workshop labs
 * Enable required Google Cloud service APIs for the workshop labs
      
-If you do not have an existing Google Cloud account, you can create a free trial account with $300 credit. Detail is [here]( https://cloud.google.com/free/docs/free-cloud-features#free-trial). Start Free [here](https://cloud.google.com/)!
+If you do not have an existing Google Cloud account, you can create a free trial account with $300 credit. Details are [here]( https://cloud.google.com/free/docs/free-cloud-features#free-trial). Start Free [here](https://cloud.google.com/)!
    
-**It is recommend to create a new Google Cloud project for this workshop as it is easier to clean up upon completion.** 
+**It is recommended to create a new Google Cloud project for this workshop as it is easier to clean up upon completion.** 
     
 #### Open a Cloud Shell
 Once you successfully log into your Google Cloud account, you can open a Cloud Shell to begin your lab.
