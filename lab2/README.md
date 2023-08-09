@@ -1,4 +1,4 @@
-# Lab 2: Create Google Cloud Infrastrcuture Components
+# Lab 2: Create Google Cloud Infrastructure Components
      
 In this lab, you are going to:
 * Create a VPC
