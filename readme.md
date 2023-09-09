@@ -56,3 +56,6 @@ Part 2: Development and Deployment Labs - Part II
 
 Part 3: Gen AI powered applications - How Gen AI + Redis VSS can work together
 * [Lab 8:](./lab8/VertexAI_LangChain_Redis.ipynb) Document Question Answering with Langchain, VertexAI and Redis
+   
+Part 4: Cleanup
+* [Lab cleanup:](./part4/) Delete all resources created in this workshop from your Google Cloud project
