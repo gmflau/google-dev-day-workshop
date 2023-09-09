@@ -1,0 +1,49 @@
+membershipStates:
+  projects/30502594104/locations/us-central1/memberships/redis-gke-cluster-us-central1-membership:
+    servicemesh:
+      controlPlaneManagement:
+        details:
+        - code: REVISION_PROVISIONING
+          details: 'Provisioning: asm-managed'
+        state: PROVISIONING
+      dataPlaneManagement:
+        details:
+        - code: DISABLED
+          details: Data Plane Management is not enabled.
+        state: DISABLED
+    state:
+      code: OK
+      description: 'Revision(s) being rolled out: asm-managed.'
+      updateTime: '2023-08-01T18:26:57.613812423Z'
+name: projects/gcp-dev-day-sf-02/locations/global/features/servicemesh
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2023-08-01T18:27:05.722854807Z'
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+membershipStates:
+  projects/30502594104/locations/us-central1/memberships/redis-gke-cluster-us-central1-membership:
+    servicemesh:
+      controlPlaneManagement:
+        details:
+        - code: REVISION_READY
+          details: 'Ready: asm-managed'
+        state: ACTIVE
+      dataPlaneManagement:
+        details:
+        - code: OK
+          details: Service is running.
+        state: ACTIVE
+    state:
+      code: OK
+      description: 'Revision(s) ready for use: asm-managed.'
+      updateTime: '2023-08-01T18:31:37.098020126Z'
+name: projects/gcp-dev-day-sf-02/locations/global/features/servicemesh
+resourceState:
+  state: ACTIVE
+spec: {}
+updateTime: '2023-08-01T18:31:45.701354097Z'
+
+
